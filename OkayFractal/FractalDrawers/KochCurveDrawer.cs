@@ -22,17 +22,19 @@ namespace OkayFractal
         /// </summary>
         /// <param name="canvas">Холст для отрисовки фрактала.</param>
         /// <param name="depth">Глубина фрактала.</param>
-        public KochCurveDrawer(Canvas canvas, int depth) : base(depth) => UpdateCanvas(canvas);
+        public KochCurveDrawer(Canvas canvas, int depth) : base(canvas, depth) {}
 
         /// <summary>
-        /// Метод обновления холста для отрисовки фрактала.
+        /// Установка холста для отрисовки фрактала.
         /// </summary>
-        /// <param name="canvas">Новый холст.</param>
-        public override void UpdateCanvas(Canvas canvas)
+        public override Canvas Canvas
         {
-            _canvas = canvas;
-            _startPoint = (30, canvas.ActualHeight / 2);
-            _startWidth = canvas.ActualWidth - 40;
+            set
+            {
+                _canvas = value;
+                _startPoint = (30, value.ActualHeight / 2);
+                _startWidth = value.ActualWidth - 40;
+            }
         }
 
         /// <summary>

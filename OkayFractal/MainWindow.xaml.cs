@@ -102,7 +102,6 @@ namespace OkayFractal
 
             FractalCanvas.Children.Clear();
             _currentFractal.DrawFractal();
-
         }
 
         /// <summary>
@@ -167,12 +166,12 @@ namespace OkayFractal
         /// <param name="e">Аргументы события.</param>
         private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (FractalCanvas == null)
+            if (FractalCanvas is null || _currentFractal is null)
                 return;
             
             FractalCanvas.Children.Clear();
-            _currentFractal?.UpdateCanvas(FractalCanvas);
-            _currentFractal?.DrawFractal();
+            _currentFractal.Canvas = FractalCanvas;
+            _currentFractal.DrawFractal();
         }
     }
 }

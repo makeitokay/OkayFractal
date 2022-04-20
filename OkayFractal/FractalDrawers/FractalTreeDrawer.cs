@@ -39,25 +39,26 @@ namespace OkayFractal
         /// <param name="leftAngle">Угол левой ветки дерева.</param>
         /// <param name="rightAngle">Угол правой ветки дерева.</param>
         /// <param name="scale">Доп. коэффициент, задающий отношение между длинами отрезков соседних итераций.</param>
-        public FractalTreeDrawer(Canvas canvas, int depth, double leftAngle, double rightAngle, double scale) : base(depth)
+        public FractalTreeDrawer(Canvas canvas, int depth, double leftAngle, double rightAngle, double scale) : base(canvas, depth)
         {
-            UpdateCanvas(canvas);
             LeftAngle = leftAngle;
             RightAngle = rightAngle;
             Scale = scale;
         }
 
         /// <summary>
-        /// Метод обновления холста для отрисовки фрактала.
+        /// Установка холста для отрисовки фрактала.
         /// </summary>
-        /// <param name="canvas">Новый холст.</param>
-        public override void UpdateCanvas(Canvas canvas)
+        public override Canvas Canvas
         {
-            _canvas = canvas;
-            _startPoint = (canvas.ActualWidth / 2, canvas.ActualHeight - 15);
-            _startWidth = canvas.ActualHeight / 5;
+            set
+            {
+                _canvas = value;
+                _startPoint = (_canvas.ActualWidth / 2, _canvas.ActualHeight - 15);
+                _startWidth = _canvas.ActualHeight / 5; 
+            }
         }
-
+        
         /// <summary>
         /// Главный метод, который вызывает отрисовку фрактала.
         /// </summary>

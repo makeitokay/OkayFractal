@@ -16,19 +16,23 @@ namespace OkayFractal
         /// </summary>
         public abstract void DrawFractal();
 
+        public abstract Canvas Canvas
+        {
+            set;
+        }
+        
         protected Canvas _canvas;
 
         /// <summary>
         /// Конструктор, инициализирующий экземпляр класса.
         /// </summary>
         /// <param name="depth">Глубина фрактала.</param>
-        protected FractalDrawer(int depth)
+        protected FractalDrawer(Canvas canvas, int depth)
         {
+            Canvas = canvas;
             Depth = depth;
         }
 
-        public abstract void UpdateCanvas(Canvas canvas);
-        
         /// <summary>
         /// Метод обновления глубины фрактала.
         /// </summary>

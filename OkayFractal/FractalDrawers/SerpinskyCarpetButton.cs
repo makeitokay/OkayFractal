@@ -19,16 +19,18 @@ namespace OkayFractal
         /// </summary>
         /// <param name="canvas">Холст для отрисовки фрактала.</param>
         /// <param name="depth">Глубина фрактала.</param>
-        public SerpinskyCarpetButton(Canvas canvas, int depth) : base(depth) => UpdateCanvas(canvas);
+        public SerpinskyCarpetButton(Canvas canvas, int depth) : base(canvas, depth) {}
 
         /// <summary>
-        /// Метод обновления холста для отрисовки фрактала.
+        /// Установка холста для отрисовки фрактала.
         /// </summary>
-        /// <param name="canvas">Новый холст.</param>
-        public override void UpdateCanvas(Canvas canvas)
+        public override Canvas Canvas
         {
-            _canvas = canvas;
-            _startWidth = _canvas.ActualWidth / 2;
+            set
+            {
+                _canvas = value;
+                _startWidth = _canvas.ActualWidth / 2;
+            }
         }
 
         /// <summary>

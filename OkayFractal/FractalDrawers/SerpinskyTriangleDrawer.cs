@@ -22,26 +22,28 @@ namespace OkayFractal
         /// </summary>
         /// <param name="canvas"></param>
         /// <param name="depth"></param>
-        public SerpinskyTriangleDrawer(Canvas canvas, int depth) : base(depth) => UpdateCanvas(canvas);
+        public SerpinskyTriangleDrawer(Canvas canvas, int depth) : base(canvas, depth) {}
 
         /// <summary>
-        /// Метод обновления холста для отрисовки фрактала.
+        /// Установка холста для отрисовки фрактала.
         /// </summary>
-        /// <param name="canvas">Новый холст.</param>
-        public override void UpdateCanvas(Canvas canvas)
+        public override Canvas Canvas
         {
-            _canvas = canvas;
-            _triangleMargin = _canvas.ActualWidth / 5;
-            _startTriangle = new List<Point>
+            set
             {
-                new() { X = _triangleMargin, Y = _canvas.ActualHeight - 15 },
-                new()
+                _canvas = value;
+                _triangleMargin = _canvas.ActualWidth / 5;
+                _startTriangle = new List<Point>
                 {
-                    X = _triangleMargin + (_canvas.ActualWidth - _triangleMargin * 2) / 2.0, 
-                    Y = _canvas.ActualHeight - 15 - Math.Sqrt(0.75 * Math.Pow(_canvas.ActualWidth - _triangleMargin * 2, 2))
-                },
-                new() { X = _canvas.ActualWidth - _triangleMargin, Y = _canvas.ActualHeight - 15 }
-            };
+                    new() { X = _triangleMargin, Y = _canvas.ActualHeight - 15 },
+                    new()
+                    {
+                        X = _triangleMargin + (_canvas.ActualWidth - _triangleMargin * 2) / 2.0, 
+                        Y = _canvas.ActualHeight - 15 - Math.Sqrt(0.75 * Math.Pow(_canvas.ActualWidth - _triangleMargin * 2, 2))
+                    },
+                    new() { X = _canvas.ActualWidth - _triangleMargin, Y = _canvas.ActualHeight - 15 }
+                };
+            }
         }
 
         /// <summary>

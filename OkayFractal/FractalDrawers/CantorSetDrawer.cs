@@ -18,17 +18,19 @@ namespace OkayFractal
         /// </summary>
         /// <param name="canvas">Холст для отрисовки фрактала.</param>
         /// <param name="depth">Глубина фрактала.</param>
-        public CantorSetDrawer(Canvas canvas, int depth) : base(depth) => UpdateCanvas(canvas);
+        public CantorSetDrawer(Canvas canvas, int depth) : base(canvas, depth) {}
 
         /// <summary>
-        /// Метод обновления холста для отрисовки фрактала.
+        /// Установка холста для отрисовки фрактала.
         /// </summary>
-        /// <param name="canvas">Новый холст.</param>
-        public override void UpdateCanvas(Canvas canvas)
+        public override Canvas Canvas
         {
-            _canvas = canvas;
-            _startWidth = _canvas.ActualWidth - 50;
-            _startPoint = (15, _canvas.ActualHeight / 2.0);
+            set
+            {
+                _canvas = value;
+                _startWidth = _canvas.ActualWidth - 50;
+                _startPoint = (15, _canvas.ActualHeight / 2.0);
+            }
         }
 
         public override int MaxDepth => 8;
