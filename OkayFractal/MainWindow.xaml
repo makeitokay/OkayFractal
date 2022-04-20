@@ -1,0 +1,66 @@
+﻿<Window x:Class="OkayFractal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OkayFractal"
+        mc:Ignorable="d"
+        Title="OkayFractal" Height="450" Width="800"
+        Loaded="MainWindow_OnLoaded"
+        SizeChanged="MainWindow_OnSizeChanged">
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Left" Margin="15 10 0 0">
+            <TextBlock Margin="0 0 0 2">Фрактал:</TextBlock>
+            <RadioButton GroupName="Fractals" Name="FractalTreeButton" Content="Фрактальное дерево" IsChecked="True" Checked="FractalRadioButton_OnChecked" />
+            <RadioButton GroupName="Fractals" Name="KochCurveButton" Content="Кривая Коха" Margin="0 0 0 2" Checked="FractalRadioButton_OnChecked" />
+            <RadioButton GroupName="Fractals" Name="SerpinskyCarpetButton" Content="Ковер Серпинского" Margin="0 0 0 2" Checked="FractalRadioButton_OnChecked"/>
+            <RadioButton GroupName="Fractals" Name="SerpinskyTriangleButton" Content="Треугольник Серпинского" Margin="0 0 0 2" Checked="FractalRadioButton_OnChecked"/>
+            <RadioButton GroupName="Fractals" Name="CantorSetButton" Content="Множество Кантора" Margin="0 0 0 2" Checked="FractalRadioButton_OnChecked"/>
+            <TextBlock Margin="0 0 0 2">Глубина:</TextBlock>
+            <StackPanel Width="150" HorizontalAlignment="Left" Orientation="Horizontal">
+                <Slider Value="{Binding ElementName=FractalDepthTextBoxValue, Path=Text}" Minimum="1" Maximum="11" 
+                        SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" 
+                        Width="120" HorizontalAlignment="Left" 
+                        ValueChanged="FractalDepthSlider_ValueChanged" 
+                        TickFrequency="1" IsSnapToTickEnabled="True"
+                        Name="FractalDepthSlider"/>
+                <TextBox Width="30" TextAlignment="Center" Name="FractalDepthTextBoxValue" 
+                         TextChanged="FractalDepthTextBoxValue_OnTextChanged" 
+                         Text="{Binding ElementName=FractalDepthSlider, Path=Value}"/>
+            </StackPanel>
+            
+            <TextBlock Margin="0 0 0 2">Угол левой ветки дерева:</TextBlock>
+            <StackPanel Width="150" HorizontalAlignment="Left" Orientation="Horizontal">
+                <Slider Value="36" Minimum="1" Maximum="89" 
+                        SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" 
+                        Width="120" HorizontalAlignment="Left" 
+                        ValueChanged="TreeAngleSlider_OnValueChanged" TickFrequency="1" IsSnapToTickEnabled="True"
+                        Name="LeftTreeAngleSlider"/>
+                <TextBlock Text="{Binding ElementName=LeftTreeAngleSlider, Path=Value}"/>
+            </StackPanel>
+
+            <TextBlock Margin="0 0 0 2">Угол правой ветки дерева:</TextBlock>
+            <StackPanel Width="150" HorizontalAlignment="Left" Orientation="Horizontal">
+                <Slider Value="26" Minimum="1" Maximum="89" 
+                        SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" 
+                        Width="120" HorizontalAlignment="Left" 
+                        ValueChanged="TreeAngleSlider_OnValueChanged" 
+                        TickFrequency="1" IsSnapToTickEnabled="True"
+                        Name="RightTreeAngleSlider"/>
+                <TextBlock Text="{Binding ElementName=RightTreeAngleSlider, Path=Value}"/>
+            </StackPanel>
+            
+            <TextBlock Margin="0 0 0 2">Коэффициент уменьшения длины ветки:</TextBlock>
+            <StackPanel Width="150" HorizontalAlignment="Left" Orientation="Horizontal">
+                <Slider Value="0.8" Minimum="0.1" Maximum="1" 
+                        SelectionStart="0" Height="30" IsSelectionRangeEnabled="True" 
+                        Width="120" HorizontalAlignment="Left" 
+                        ValueChanged='ScaleSlider_OnValueChanged' 
+                        TickFrequency="0.1" IsSnapToTickEnabled="True"
+                        Name="ScaleSlider"/>
+                <TextBlock Text="{Binding ElementName=ScaleSlider, Path=Value}"/>
+            </StackPanel>
+        </StackPanel>
+        <Canvas Name="FractalCanvas"/>
+    </DockPanel>
+</Window>
